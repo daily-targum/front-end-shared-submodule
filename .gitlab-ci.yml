@@ -1,0 +1,40 @@
+image: node:12
+
+cache: &global_cache
+  paths:
+    - node_modules/
+    - .yarn
+  policy: pull-push
+
+stages:
+  - setup
+  - test
+
+InstallDependencies:
+  stage: setup
+  script: 
+    - yarn install --pure-lockfile --cache-folder .yarn
+  cache:
+    # inherit all global cache settings
+    <<: *global_cache
+
+TypeScript:
+  stage: test
+  script:
+    - yarn typescript
+  cache:
+    # inherit all global cache settings
+    <<: *global_cache
+    # override the policy
+    policy: pull
+
+Tests:
+  stage: test
+  script:
+    - yarn test --watchAll=false --coverage --ci
+  cache:
+    # inherit all global cache settings
+    <<: *global_cache
+    # override the policy
+    policy: pull
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/

@@ -1,0 +1,33 @@
+{
+  "name": "daily-targum-backend-tests",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --watchAll=true",
+    "typescript": "tsc --noEmit"
+  },
+  "dependencies": {
+    "aws-appsync": "^3.0.3",
+    "graphql-tag": "^2.10.3",
+    "isomorphic-fetch": "^2.2.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@types/jest": "^25.2.1",
+    "commitlint": "^8.3.5",
+    "husky": "^4.2.5",
+    "jest": "^25.4.0",
+    "react-test-renderer": "^16.13.1",
+    "typescript": "^3.9.0-dev.20200421"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn typescript && yarn test --watchAll=false --collectCoverageFrom=src/**/*.{js,jsx,ts,tsx} --coverage"
+    }
+  }
+}
