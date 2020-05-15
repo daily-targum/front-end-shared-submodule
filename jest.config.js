@@ -7,5 +7,9 @@ module.exports = {
     "**/*.test.jsx",
     "**/*.test.ts",
     "**/*.test.tsx"
+  ],
+  collectCoverageFrom: [
+    "src/**/*.{ts,tsx}",
+    "!**/node_modules/**",
   ]
 };
