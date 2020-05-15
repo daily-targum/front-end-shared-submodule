@@ -1,5 +1,5 @@
 import { getArticles, getArticle } from '..';
-import * as regex from '../../regex';
+import * as regex from '../../../regex';
 
 let ID = '';
 

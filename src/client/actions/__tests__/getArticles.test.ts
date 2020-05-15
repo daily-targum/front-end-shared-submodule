@@ -1,6 +1,6 @@
-import { getRandomInt } from '../../utils';
+import { getRandomInt } from '../../../utils';
 import { getArticles } from '..';
-import * as regex from '../../regex';
+import * as regex from '../../../regex';
 
 const CAGETORIES = ['News', 'Sports', 'Opinions', 'inside-beat'];
 

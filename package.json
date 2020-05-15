@@ -15,17 +15,17 @@
     "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-env": "7.9.6",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
     "@commitlint/config-conventional": "^8.3.4",
-    "@types/jest": "^25.2.1",
+    "@types/jest": "25.2.2",
     "commitlint": "^8.3.5",
     "dotenv": "^8.2.0",
     "husky": "^4.2.5",
-    "jest": "^25.4.0",
+    "jest": "26.0.1",
     "react-test-renderer": "^16.13.1",
-    "typescript": "^3.9.0-dev.20200421"
+    "typescript": "3.9.2"
   },
   "husky": {
     "hooks": {
