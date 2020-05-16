@@ -1,3 +1,5 @@
+// ENVIRONMENT VARIABLES
+
 export default {
   appOwnership: 'expo',
   manifest: {

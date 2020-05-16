@@ -1,10 +1,8 @@
-name: CI
-# This workflow is triggered on pushes to the repository.
-on: 
-  push:
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0 4 * * *'
+# ENVIRONMENT VARIABLES
+
+name: Default
+
+on: [push]
 
 jobs:
   setup-linux:
@@ -59,10 +57,3 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-        env:
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: ${{ failure() }}

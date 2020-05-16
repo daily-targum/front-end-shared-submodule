@@ -1,3 +1,5 @@
+// ENVIRONMENT VARIABLES
+
 import 'isomorphic-fetch';
 import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 import * as secrets from '../secrets';

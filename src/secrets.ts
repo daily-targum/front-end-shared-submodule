@@ -1,3 +1,5 @@
+// ENVIRONMENT VARIABLES
+
 // @ts-nocheck
 import Constants from 'expo-constants';
 
