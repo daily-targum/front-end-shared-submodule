@@ -1,3 +1,4 @@
 import * as actions from './actions';
-export { default as client } from './client';
+export * from './client';
+export * from './actions';
 export { actions };

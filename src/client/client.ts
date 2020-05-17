@@ -4,7 +4,7 @@ import 'isomorphic-fetch';
 import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 import * as secrets from '../secrets';
 
-export default new AWSAppSyncClient({
+export const client = new AWSAppSyncClient({
   url: secrets.AWS_APPSYNC_URL,
   region: secrets.AWS_APPSYNC_REGION,
   auth: {
