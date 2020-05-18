@@ -6,7 +6,7 @@ export interface GetArticles {
     id: string
     title: string
     author: string[]
-    media: string
+    media: string[]
     publishDate: string
     tags: string[]
   }[]
@@ -53,12 +53,12 @@ export interface GetArticle {
   slug: string
   title: string
   authors: string[]
-  media: string
-  publishDate: string
-  updatedAt: string
+  media: string[]
+  publishDate: number
+  updatedAt: number
   body: string,
   category: string
-  abstract: string
+  abstract?: string
 }
 
 export async function getArticle({
