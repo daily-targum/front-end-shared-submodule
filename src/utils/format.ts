@@ -1,8 +1,11 @@
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
 
-export const formatDateAbriviated = (date: string | Date): string => {
-  const now = dayjs();
-  const articleDate = dayjs(date);
+export const formatDateAbriviated = (date: number | string): string => {
+  const utcOffset = dayjs().utcOffset();
+  const now = dayjs().utc();
+  const articleDate = dayjs((+date) * 1000, {utc: true}).utcOffset(utcOffset);
   const minDiff = now.diff(articleDate, 'minute');
   const hourDiff = now.diff(articleDate, 'hour');
   const dayDiff = now.diff(articleDate, 'day');
@@ -29,6 +32,7 @@ export const formatDateAbriviated = (date: string | Date): string => {
   }
 }
 
-export const formatDate = (date: string | Date) => {
-  return dayjs(date).format('MMM D, YYYY, h:mm A');
+export const formatDate = (date: number | string) => {
+  const utcOffset = dayjs().utcOffset();
+  return dayjs((+date) * 1000, {utc: true}).utcOffset(utcOffset).format('MMM D, YYYY, h:mm A');
 }

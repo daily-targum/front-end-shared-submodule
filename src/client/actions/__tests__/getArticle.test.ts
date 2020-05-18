@@ -20,12 +20,15 @@ describe("getArticles", () => {
     });
     expect(res).toMatchObject({
       id: expect.stringMatching(regex.id),
+      slug: expect.any(String),
       title: expect.any(String),
-      author: expect.any(String),
-      media: expect.stringMatching(regex.url),
-      date: expect.stringMatching(regex.dateISO.updated2004.noTimezone),
-      content: expect.any(String),
-      url: expect.stringMatching(regex.url)
+      authors: expect.arrayContaining([expect.any(String)]),
+      media: expect.arrayContaining([expect.stringMatching(regex.url)]),
+      publishDate: expect.any(Number),
+      updatedAt: expect.any(Number),
+      body: expect.any(String),
+      category: expect.any(String),
+      // abstract: expect.any(String)
     });
     done();
   });

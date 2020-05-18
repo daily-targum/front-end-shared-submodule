@@ -5,10 +5,10 @@ export interface GetArticles {
   items: {
     id: string
     title: string
-    author: string
+    author: string[]
     media: string
-    date: string
-    url: string
+    publishDate: string
+    tags: string[]
   }[]
   nextToken: string
 }
@@ -29,10 +29,10 @@ export async function getArticles({
           items {
             id
             title
-            author
+            authors
             media
-            date
-            url
+            publishDate
+            tags
           }
           nextToken
         }
@@ -50,12 +50,15 @@ export async function getArticles({
 
 export interface GetArticle {
   id: string
+  slug: string
   title: string
-  author: string
+  authors: string[]
   media: string
-  date: string
-  content: string,
-  url: string
+  publishDate: string
+  updatedAt: string
+  body: string,
+  category: string
+  abstract: string
 }
 
 export async function getArticle({
@@ -68,12 +71,15 @@ export async function getArticle({
       query getArticle($id: ID!) {
         getArticle(id: $id) {
           id
+          slug
           title
-          author
+          authors
           media
-          date
-          content
-          url
+          publishDate
+          updatedAt
+          body
+          category
+          abstract
         }
       }
     `,

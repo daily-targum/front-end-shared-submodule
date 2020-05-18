@@ -5,67 +5,67 @@ describe('formatDateAbriviated', () => {
 
   it('now', () => {
     const date = dayjs();
-    expect(formatDateAbriviated(date.toDate())).toBe('Now');
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe('Now');
   });
 
   it('one minute ago', () => {
     const date = dayjs().subtract(1, 'minute');
-    expect(formatDateAbriviated(date.toDate())).toBe('1 minute ago');
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe('1 minute ago');
   });
 
   it('ten minutes ago', () => {
     const date = dayjs().subtract(10, 'minute');
-    expect(formatDateAbriviated(date.toDate())).toBe('10 minutes ago');
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe('10 minutes ago');
   });
 
   it('thirty minutes ago', () => {
     const date = dayjs().subtract(30, 'minute');
-    expect(formatDateAbriviated(date.toDate())).toBe('30 minutes ago');
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe('30 minutes ago');
   });
 
   it('fifty minutes ago', () => {
     const date = dayjs().subtract(50, 'minute');
-    expect(formatDateAbriviated(date.toDate())).toBe('50 minutes ago');
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe('50 minutes ago');
   });
 
   it('one hour ago', () => {
     const date = dayjs().subtract(1, 'hour');
-    expect(formatDateAbriviated(date.toDate())).toBe('1 hour ago');
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe('1 hour ago');
   });
 
   it('two hours ago', () => {
     const date = dayjs().subtract(2, 'hour');
-    expect(formatDateAbriviated(date.toDate())).toBe('2 hours ago');
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe('2 hours ago');
   });
 
   it('twelve hours ago', () => {
     const date = dayjs().subtract(12, 'hour');
-    expect(formatDateAbriviated(date.toDate())).toBe('12 hours ago');
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe('12 hours ago');
   });
 
   it('twenty-three hours ago', () => {
     const date = dayjs().subtract(23, 'hour');
-    expect(formatDateAbriviated(date.toDate())).toBe('23 hours ago');
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe('23 hours ago');
   });
 
   it('one week ago', () => {
     const date = dayjs().subtract(1, 'week');
-    expect(formatDateAbriviated(date.toDate())).toBe(date.format('MMM D'));
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe(date.format('MMM D'));
   });
 
   it('two week ago', () => {
     const date = dayjs().subtract(2, 'week');
-    expect(formatDateAbriviated(date.toDate())).toBe(date.format('MMM D'));
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe(date.format('MMM D'));
   });
 
   it('one year ago', () => {
     const date = dayjs().subtract(1, 'year');
-    expect(formatDateAbriviated(date.toDate())).toBe(date.format('MMM D YYYY'));
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe(date.format('MMM D YYYY'));
   });
 
   it('two years ago', () => {
     const date = dayjs().subtract(2, 'year');
-    expect(formatDateAbriviated(date.toDate())).toBe(date.format('MMM D YYYY'));
+    expect(formatDateAbriviated(date.toDate().valueOf()/1000)).toBe(date.format('MMM D YYYY'));
   });
 
 });
@@ -76,67 +76,67 @@ describe('formatDate', () => {
 
   it('now', () => {
     const date = dayjs();
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('one minute ago', () => {
     const date = dayjs().subtract(1, 'minute');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('ten minutes ago', () => {
     const date = dayjs().subtract(10, 'minute');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('thirty minutes ago', () => {
     const date = dayjs().subtract(30, 'minute');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('fifty minutes ago', () => {
     const date = dayjs().subtract(50, 'minute');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('one hour ago', () => {
     const date = dayjs().subtract(1, 'hour');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('two hours ago', () => {
     const date = dayjs().subtract(2, 'hour');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('twelve hours ago', () => {
     const date = dayjs().subtract(12, 'hour');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('twenty-three hours ago', () => {
     const date = dayjs().subtract(23, 'hour');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('one week ago', () => {
     const date = dayjs().subtract(1, 'week');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('two week ago', () => {
     const date = dayjs().subtract(2, 'week');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('one year ago', () => {
     const date = dayjs().subtract(1, 'year');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
   it('two years ago', () => {
     const date = dayjs().subtract(2, 'year');
-    expect(formatDate(date.toDate())).toBe(date.format(DATE_FORMAT));
+    expect(formatDate(date.toDate().valueOf()/1000)).toBe(date.format(DATE_FORMAT));
   });
 
 });

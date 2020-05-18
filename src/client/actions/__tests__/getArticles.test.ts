@@ -17,7 +17,7 @@ describe("getArticles", () => {
   });
 
   it("limit", async (done) => {
-    const limit = getRandomInt(1, 30);
+    const limit = getRandomInt(1, 20);
     const res = await getArticles({
       category: 'News',
       limit
@@ -26,21 +26,21 @@ describe("getArticles", () => {
     done();
   });
 
-  it("nextToken", async (done) => {
-    let res = await getArticles({
-      category: 'News',
-      nextToken: ''
-    });
-    const nextToken = res.nextToken;
-    res = await getArticles({
-      category: 'News',
-      nextToken
-    });
-    expect(res.items.length).toBeGreaterThan(0);
-    expect(res.nextToken).not.toBe(nextToken);
-    expect(res.nextToken).toMatch(/.+/);
-    done();
-  });
+  // it("nextToken", async (done) => {
+  //   let res = await getArticles({
+  //     category: 'News',
+  //     nextToken: ''
+  //   });
+  //   const nextToken = res.nextToken;
+  //   res = await getArticles({
+  //     category: 'News',
+  //     nextToken
+  //   });
+  //   expect(res.items.length).toBeGreaterThan(0);
+  //   expect(res.nextToken).not.toBe(nextToken);
+  //   expect(res.nextToken).toMatch(/.+/);
+  //   done();
+  // });
 
   it("schema", async (done) => {
     const res = await getArticles({
@@ -50,11 +50,10 @@ describe("getArticles", () => {
       expect(item).toMatchObject({
         id: expect.stringMatching(regex.id),
         title: expect.any(String),
-        author: expect.any(String),
-        media: expect.stringMatching(regex.url),
-        date: expect.stringMatching(regex.dateISO.updated2004.noTimezone),
-        url: expect.stringMatching(regex.url),
-        __typename: 'Article'
+        authors: expect.arrayContaining([expect.any(String)]),
+        media: expect.arrayContaining([expect.stringMatching(regex.url)]),
+        publishDate: expect.any(Number),
+        tags: expect.arrayContaining([])
       });
     });
     done();
