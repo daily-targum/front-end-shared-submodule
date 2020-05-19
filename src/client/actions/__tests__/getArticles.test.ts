@@ -26,21 +26,23 @@ describe("getArticles", () => {
     done();
   });
 
-  // it("nextToken", async (done) => {
-  //   let res = await getArticles({
-  //     category: 'News',
-  //     nextToken: ''
-  //   });
-  //   const nextToken = res.nextToken;
-  //   res = await getArticles({
-  //     category: 'News',
-  //     nextToken
-  //   });
-  //   expect(res.items.length).toBeGreaterThan(0);
-  //   expect(res.nextToken).not.toBe(nextToken);
-  //   expect(res.nextToken).toMatch(/.+/);
-  //   done();
-  // });
+  it("nextToken", async (done) => {
+    let res = await getArticles({
+      category: 'News',
+      nextToken: '',
+      limit: 5
+    });
+    const nextToken = res.nextToken;
+    res = await getArticles({
+      category: 'News',
+      nextToken,
+      limit: 5
+    });
+    expect(res.items.length).toBeGreaterThan(0);
+    expect(res.nextToken).not.toBe(nextToken);
+    expect(res.nextToken).toMatch(/.+/);
+    done();
+  });
 
   it("schema", async (done) => {
     const res = await getArticles({
