@@ -1,6 +1,6 @@
 import { GetArticle, GetArticles } from '../articles';
 
-const ARTICLE: GetArticle = {
+export const ARTICLE: GetArticle = {
   id: "05db0666-e54c-4a8d-a8e5-b9649ca36948",
   slug: "rutgers-ncaa-tournament-hopes-depend-on-team-wide-performance",
   title: "Rutgers' NCAA Tournament hopes depend on team-wide performance",
