@@ -53,7 +53,4 @@ jobs:
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
           CONTENTFUL_ACCESS_TOKEN_DRAFTS: ${{ secrets.CONTENTFUL_ACCESS_TOKEN_DRAFTS }}
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: codecov/codecov-action@v1

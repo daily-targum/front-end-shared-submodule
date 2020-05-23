@@ -3,8 +3,8 @@
     <img src='https://github.com/daily-targum/front-end-shared-submodule/workflows/Default/badge.svg'>
   </a>
 
-  <a href='https://coveralls.io/github/daily-targum/front-end-shared-submodule'>
-    <img src='https://coveralls.io/repos/github/daily-targum/front-end-shared-submodule/badge.svg' alt='Coverage Status' />
+  <a href="https://codecov.io/gh/daily-targum/front-end-shared-submodule">
+    <img src="https://codecov.io/gh/daily-targum/front-end-shared-submodule/branch/master/graph/badge.svg" />
   </a>
 
   <img alt="GitHub" src="https://img.shields.io/github/license/daily-targum/front-end-shared-submodule">
