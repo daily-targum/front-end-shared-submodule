@@ -1,5 +1,3 @@
-import { Document } from '@contentful/rich-text-types';
-
 import { client } from '../client';
 import gql from 'graphql-tag';
 
