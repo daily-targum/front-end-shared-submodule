@@ -1,16 +1,23 @@
-import { client } from '../client';
+import { client, previewClient } from '../client';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
 import gql from 'graphql-tag';
 
+
+export interface Article {
+  id: string;
+  title: string;
+  author: string[];
+  media: string[];
+  publishDate: string;
+  tags: string[];
+  slug: string;
+}
+
 export interface GetArticles {
-  items: {
-    id: string;
-    title: string;
-    author: string[];
-    media: string[];
-    publishDate: string;
-    tags: string[];
-    slug: string;
-  }[]
+  items: Article[]
   nextToken: string;
 }
 
@@ -125,3 +132,92 @@ export async function getArticle({
   });
   return id ? res.data.getArticle : res.data.getArticleBySlug?.[0];
 }
+
+export async function getArticlePreview({
+  id
+}: {
+  id: string
+}): Promise<GetArticle> {
+  const res: any = await previewClient.getEntry(id);
+  return {
+    id: res.sys.id,
+    title: res.fields.title,
+    authors: res.fields.authors?.map((a: any) => a.fields.displayName) || [],
+    media: res.fields.image?.fields.image.fields.file?.url || '',
+    publishDate: dayjs(res.sys.updatedAt, {utc: true}).valueOf() / 1000,
+    updatedAt: dayjs(res.sys.updatedAt, {utc: true}).valueOf() / 1000,
+    slug: res.fields.slug,
+    body: documentToHtmlString(res.fields.body),
+    category: '',
+    abstract: ''
+  }
+}
+
+export interface GetHomepage {
+  high: Article[];
+  insideBeat: Article[];
+  opinions: Article[];
+  sports: Article[];
+  news: Article[];
+}
+
+export async function getHomepage(): Promise<GetHomepage> {
+  const res: any = await client.query({
+    query: gql`
+      query {
+        getHomepage(device: 0){
+          high {
+            id
+            title
+            authors
+            media
+            publishDate
+            tags
+            slug
+          }
+          insideBeat {
+            id
+            title
+            authors
+            media
+            publishDate
+            tags
+            slug
+          }
+          opinions {
+            id
+            title
+            authors
+            media
+            publishDate
+            tags
+            slug
+          }
+          sports {
+            id
+            title
+            authors
+            media
+            publishDate
+            tags
+            slug
+          } 
+          news {
+            id
+            title
+            authors
+            media
+            publishDate
+            tags
+            slug
+          } 
+        }
+      }
+    `,
+    fetchPolicy: 'no-cache',
+    variables: {}
+  });
+
+  return res.data.getHomepage;
+}
+
