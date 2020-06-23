@@ -9,7 +9,7 @@ import gql from 'graphql-tag';
 export interface Article {
   id: string;
   title: string;
-  author: string[];
+  authors: string[];
   media: string[];
   publishDate: string;
   tags: string[];
