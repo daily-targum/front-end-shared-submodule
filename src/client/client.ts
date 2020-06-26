@@ -1,9 +1,9 @@
 // ENVIRONMENT VARIABLES
 
 // @ts-ignore
-// import { createClient } from 'contentful/dist/contentful.browser.min.js';
+import { createClient } from 'contentful/dist/contentful.browser.min.js';
 // import { ContentfulClientApi } from 'contentful';
-import * as contentful from 'contentful';
+// import * as contentful from 'contentful';
 
 import 'isomorphic-fetch';
 import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
@@ -19,7 +19,7 @@ export const client = new AWSAppSyncClient({
   disableOffline: true
 });
 
-export const previewClient = contentful.createClient({
+export const previewClient = createClient({
   host: 'preview.contentful.com',
   space: secrets.CONTENTFUL_SPACE,
   accessToken: secrets.CONTENTFUL_ACCESS_TOKEN_DRAFTS

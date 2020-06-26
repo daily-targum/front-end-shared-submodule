@@ -36,3 +36,15 @@ export const formatDate = (date: number | string) => {
   const utcOffset = dayjs().utcOffset();
   return dayjs((+date) * 1000, {utc: true}).utcOffset(utcOffset).format('MMM D, YYYY, h:mm A');
 }
+
+export function capitalizeWords(str: string){
+  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+ }
+ 
+export function camelCaseToCapitalized(str: string) {
+  return capitalizeWords(str.replace(/([A-Z])/, ' $1'));
+}
+
+export function hyphenatedToCapitalized(str: string) {
+  return capitalizeWords(str.replace(/-/g, ' '));
+}
