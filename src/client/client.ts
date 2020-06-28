@@ -1,9 +1,5 @@
 // ENVIRONMENT VARIABLES
-
-// @ts-ignore
-import { createClient } from 'contentful/dist/contentful.browser.min.js';
-// import { ContentfulClientApi } from 'contentful';
-// import * as contentful from 'contentful';
+import { createClient } from './contentful';
 
 import 'isomorphic-fetch';
 import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
