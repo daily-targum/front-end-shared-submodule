@@ -48,3 +48,7 @@ export function camelCaseToCapitalized(str: string) {
 export function hyphenatedToCapitalized(str: string) {
   return capitalizeWords(str.replace(/-/g, ' '));
 }
+
+export function hyphenatedToCamelCase(str: string) {
+  return str.replace(/-([a-z0-9])/g, (g) => g[1].toUpperCase())
+}
