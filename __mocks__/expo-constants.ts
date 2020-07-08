@@ -18,5 +18,6 @@ export default {
       CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN,
       CONTENTFUL_ACCESS_TOKEN_DRAFTS: process.env.CONTENTFUL_ACCESS_TOKEN_DRAFTS
     }
-  }
+  },
+  expoVersion: '38.0.0'
 };
