@@ -23,7 +23,8 @@ export function getArticles({
   }
   return (async () => ({
     items,
-    nextToken: 'asdfpoawejfoad'
+    nextToken: 'asdfpoawejfoad',
+    columnists: []
   }))();
 }
 

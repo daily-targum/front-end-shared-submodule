@@ -17,6 +17,7 @@ export interface Article {
 }
 
 export interface GetArticles {
+  columnists: string[]
   items: Article[]
   nextToken: string;
 }
@@ -34,6 +35,7 @@ export async function getArticles({
     query: gql`
       query getArticles($category: String!, $nextToken: String!, $limit: Int!) {
         getArticles(category: $category, limit: $limit, nextToken: $nextToken){
+          columnists
           items {
             id
             title

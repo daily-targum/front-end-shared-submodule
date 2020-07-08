@@ -52,3 +52,7 @@ export function hyphenatedToCapitalized(str: string) {
 export function hyphenatedToCamelCase(str: string) {
   return str.replace(/-([a-z0-9])/g, (g) => g[1].toUpperCase())
 }
+
+export function capitalizedToHypenated(str: string) {
+  return str.replace(/\s([A-Z])/g, '-$1').toLowerCase();
+}
