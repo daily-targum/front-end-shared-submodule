@@ -6,7 +6,7 @@ export interface GetAuthorPage {
   articles: Article[]
   author: {
     id: string
-    display_name: string
+    displayName: string
     headshot: string
   }[]
 }
@@ -31,7 +31,7 @@ export async function getAuthorPage({
           }
           author {
             id
-            display_name
+            displayName
             headshot
           }
         }
