@@ -30,4 +30,4 @@ export const dateISO = {
 /**
  * Databse ID
  */
-export const id = /^[a-z0-9]+(-[a-z0-9]+){4}$/
+export const id = /^[a-z0-9]+(-[a-z0-9]+){0,4}$/i
