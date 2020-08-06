@@ -1,6 +1,6 @@
 // jest.config.js
 module.exports = {
-  // verbose: true,
+  verbose: true,
   // automock: true,
   testMatch: [
     "**/*.test.js",
@@ -11,5 +11,6 @@ module.exports = {
   collectCoverageFrom: [
     "src/**/*.{ts,tsx}",
     "!**/node_modules/**",
-  ]
+  ],
+  setupFiles: ['./jest.setup.js', './dotenv.js']
 };

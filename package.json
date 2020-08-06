@@ -4,8 +4,8 @@
   "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
-    "coverage": "jest --watchAll=false --coverage --setupFiles ./dotenv.js",
-    "test": "jest --watchAll=true --setupFiles ./dotenv.js",
+    "coverage": "jest --watchAll=false --coverage",
+    "test": "jest --watchAll=true",
     "typescript": "tsc --noEmit"
   },
   "dependencies": {
