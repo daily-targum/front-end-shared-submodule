@@ -1,12 +1,12 @@
 // ENVIRONMENT VARIABLES
 import { createClient } from './contentful';
-
 import * as secrets from '../secrets';
 
 import ApolloClient from 'apollo-client';
 import { authLink } from 'aws-appsync-auth-link/lib/auth-link';
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+
 
 export const previewClient = createClient({
   host: 'preview.contentful.com',
