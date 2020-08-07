@@ -5,6 +5,7 @@ export interface GetPage {
   id: string;
   title: string;
   published: string;
+  slug: string;
   formattedSlug: string;
   content: string;
 }
@@ -57,6 +58,7 @@ export async function getPagePreview({
     id: sys.id,
     title: fields.title,
     published: sys.publishedAt,
+    slug: fields.slug,
     formattedSlug: fields.slug,
     content: documentToHtmlString(fields.body),
   };
