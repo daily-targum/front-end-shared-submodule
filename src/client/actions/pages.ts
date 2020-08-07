@@ -1,4 +1,4 @@
-import { client } from '../client';
+import { client, previewClient } from '../client';
 import gql from 'graphql-tag';
 
 export interface GetPage {
@@ -33,4 +33,32 @@ export async function getPage({
     }
   });
   return res.data.getPageBySlug[0];
+}
+
+export async function getPagePreview({
+  id
+}: {
+  id: string
+}): Promise<GetPage | undefined> {
+  
+  let res: any;
+  
+  try {
+    res = await previewClient.getEntry(id);
+  } catch(err) {
+    return undefined;
+  }
+
+  const { documentToHtmlString } = await import('@contentful/rich-text-html-renderer');
+
+  const { fields, sys } = res;
+
+  return {
+    id: sys.id,
+    title: fields.title,
+    published: sys.publishedAt,
+    formattedSlug: fields.slug,
+    content: documentToHtmlString(fields.body),
+  };
+
 }
