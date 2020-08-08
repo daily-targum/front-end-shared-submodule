@@ -40,10 +40,56 @@ export async function getImageGalleries(): Promise<GetImageGalleries> {
   return res.data.getImageGalleries.galleries;
 }
 
-export async function getImageGallery(id: string): Promise<Gallery | undefined> {
+// export type GetGallery = {
+//   id: string
+//   title: string
+//   updatedAt: number
+//   createdAt: number
+//   slug: string
+//   description: string
+//   media: {
+//     id: string
+//     title: string
+//     createdAt: number
+//     url: string
+//     updatedAt: number
+//     slug: string
+//   }[]
+// }
+
+export async function getImageGallery({ id }: { id: string }): Promise<Gallery | undefined> {
   const galleries = await getImageGalleries();
 
   return galleries.find(
     gallery => gallery.id === id
   );
+
+  // const res: any = await client.query({
+  //   query: gql`
+  //     query getGallery($id: String!) {
+  //       getGallery(id: $id) {
+  //         id
+  //         title
+  //         updatedAt
+  //         createdAt
+  //         slug
+  //         description
+  //         media {
+  //           id
+  //           title
+  //           createdAt
+  //           url
+  //           updatedAt
+  //           slug
+  //         }
+  //       }
+  //     }
+  //   `,
+  //   fetchPolicy: 'no-cache',
+  //   variables: {
+  //     id
+  //   }
+  // });
+
+  // return res.data.getGallery;
 }

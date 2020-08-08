@@ -7,3 +7,8 @@ export function getRandomInt(min: number, max: number) {
 export function clamp(min: number, val: number, max: number) {
   return Math.max(min, Math.min(val, max));
 }
+
+export const numbers = {
+  getRandomInt,
+  clamp
+}
