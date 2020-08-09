@@ -1,6 +1,9 @@
 // ENVIRONMENT VARIABLES
-import { createClient } from './contentful';
 import * as secrets from '../secrets';
+
+import 'isomorphic-fetch';
+import * as contentful from 'contentful';
+export const createClient = contentful.createClient;
 
 import ApolloClient from 'apollo-client';
 import { authLink } from 'aws-appsync-auth-link/lib/auth-link';
