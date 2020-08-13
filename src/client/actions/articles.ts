@@ -1,5 +1,4 @@
 import { client, previewClient } from '../client';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
@@ -141,6 +140,9 @@ export async function getArticlePreview({
   id: string
 }): Promise<GetArticle> {
   const res: any = await previewClient.getEntry(id);
+
+  const { documentToHtmlString } = await import('@contentful/rich-text-html-renderer');
+
   return {
     id: res.sys.id,
     title: res.fields.title,

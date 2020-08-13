@@ -45,6 +45,10 @@ export function camelCaseToCapitalized(str: string) {
   return capitalizeWords(str.replace(/([A-Z])/, ' $1'));
 }
 
+export function camelCaseToHyphenated(str: string) {
+  return str.replace(/([A-Z])/, '-$1').toLowerCase();
+}
+
 export function hyphenatedToCapitalized(str: string) {
   return capitalizeWords(str.replace(/-/g, ' '));
 }
