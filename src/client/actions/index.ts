@@ -5,3 +5,4 @@ export * from './authors';
 export * from './podcasts';
 export * from './galleries';
 export * from './horu';
+export * from './videos';
