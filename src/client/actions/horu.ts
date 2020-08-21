@@ -1,11 +1,17 @@
 import { client } from '../client';
 import gql from 'graphql-tag';
 
+type Media = {
+  id: string
+  title: string
+  url: string
+}
+
 export type HoruItem = {
   id: string
   title: string
   slug: string
-  photo: string
+  media: Media[]
   altText: string
   description: string
   quote: string
@@ -33,8 +39,11 @@ export async function getHoru({
             id
             title
             slug
-            photo
-            altText
+            media {
+              id
+              title
+              url
+            }
             description
             quote
             createdAt

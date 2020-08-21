@@ -4,14 +4,14 @@ import gql from 'graphql-tag';
 export type GalleryImage = {
   id: string
   title: string
-  description: string
   url: string
+  description: string
 }
 
 export type Gallery = {
   id: string
   title: string
-  images: GalleryImage[]
+  media: GalleryImage[]
 }
 
 export type GetImageGalleries = Gallery[]
@@ -20,11 +20,11 @@ export async function getImageGalleries(): Promise<GetImageGalleries> {
   const res: any = await client.query({
     query: gql`
       query {
-        getImageGalleries(device: 1) {
-          galleries {
+        getGalleries(device: 0) {
+          items {
             id
             title
-            images {
+            media {
               id
               title
               description
@@ -37,7 +37,7 @@ export async function getImageGalleries(): Promise<GetImageGalleries> {
     fetchPolicy: 'no-cache',
     variables: {}
   });
-  return res.data.getImageGalleries.galleries;
+  return res.data.getGalleries.items;
 }
 
 // export type GetGallery = {

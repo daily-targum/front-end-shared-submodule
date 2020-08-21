@@ -11,8 +11,8 @@ describe("getArticles", () => {
       category: 'News',
       limit: 1
     });
-    ID = res.items[0].id;
-    SLUG = res.items[0].slug;
+    ID = res.items[0].articles[0].id;
+    SLUG = res.items[0].articles[0].slug;
     done();
   });
 

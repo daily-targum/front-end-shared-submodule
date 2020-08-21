@@ -14,26 +14,33 @@ export async function getPage({
   slug
 }: {
   slug: string
-}): Promise<GetPage> {
-  const res: any = await client.query({
-    query: gql`
-      query getPageBySlug($slug: String!) {
-        getPageBySlug(slug: $slug){
-          id
-          title
-          published
-          slug
-          formattedSlug
-          content
+}): Promise<GetPage | undefined> {
+  let res: any;
+  
+  try {
+    res = await client.query({
+      query: gql`
+        query getPageBySlug($slug: String!) {
+          getPageBySlug(slug: $slug){
+            id
+            title
+            published
+            slug
+            formattedSlug
+            content
+          }
         }
+      `,
+      fetchPolicy: 'no-cache',
+      variables: {
+        slug
       }
-    `,
-    fetchPolicy: 'no-cache',
-    variables: {
-      slug
-    }
-  });
-  return res.data.getPageBySlug[0];
+    });
+  } catch(e) {
+    return undefined;
+  }
+  
+  return res?.data?.getPageBySlug;
 }
 
 export async function getPagePreview({

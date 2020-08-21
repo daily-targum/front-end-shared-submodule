@@ -5,26 +5,43 @@ dayjs.extend(utc);
 import gql from 'graphql-tag';
 
 
+type Media = {
+  id: string
+  title: string
+  url: string
+}
+
+export type Author = {
+  id: string
+  displayName: string
+  slug: string
+}
+
 export interface Article {
   id: string;
   title: string;
-  authors: string[];
-  media: string[];
-  publishDate: string;
+  authors: Author[];
+  media: Media[];
+  publishDate: number;
   tags: string[];
   slug: string;
+  subcategory: string
 }
 
 export interface GetArticles {
-  columnists: string[]
-  items: Article[]
+  columnists: Author[]
+  subcategories: string[]
+  items: {
+    name: string
+    articles: Article[]
+  }[]
   nextToken: string;
 }
 
 export async function getArticles({
   category,
   nextToken = '',
-  limit = 20
+  limit = 50
 }: {
   category: string,
   nextToken?: string,
@@ -34,17 +51,33 @@ export async function getArticles({
     query: gql`
       query getArticles($category: String!, $nextToken: String!, $limit: Int!) {
         getArticles(category: $category, limit: $limit, nextToken: $nextToken){
-          columnists
-          items {
+          columnists {
             id
-            title
-            authors
-            media
-            publishDate
-            tags
+            displayName
             slug
           }
-          nextToken
+          subcategories
+          items {
+            name
+            articles {
+              id
+              slug
+              tags
+              title
+              publishDate
+              subcategory
+              media {
+                id
+                title
+                url
+              }
+              authors {
+                id
+                displayName
+              }
+            }
+            nextToken
+          }
         }
       }
     `,
@@ -74,8 +107,8 @@ export interface GetArticle {
   id: string;
   slug: string;
   title: string;
-  authors: string[];
-  media: string[];
+  authors: Author[];
+  media: Media[];
   publishDate: number;
   updatedAt: number;
   body: string;
@@ -95,14 +128,22 @@ export async function getArticle({
           getArticle(id: $id) {
             id
             slug
+            tags
             title
-            authors
-            media
             publishDate
             updatedAt
             body
             category
             abstract
+            media {
+              id
+              url
+            }
+            authors {
+              id
+              displayName
+              slug
+            }
           }
         }
       `
@@ -113,14 +154,22 @@ export async function getArticle({
           getArticleBySlug(slug: $slug) {
             id
             slug
+            tags
             title
-            authors
-            media
             publishDate
             updatedAt
             body
             category
             abstract
+            media {
+              id
+              url
+            }
+            authors {
+              id
+              displayName
+              slug
+            }
           }
         }
       `
@@ -131,7 +180,7 @@ export async function getArticle({
       slug
     }
   });
-  return id ? res.data.getArticle : res.data.getArticleBySlug?.[0];
+  return id ? res.data.getArticle : res.data.getArticleBySlug;
 }
 
 export async function getArticlePreview({
@@ -173,8 +222,16 @@ export async function getHomepage(): Promise<GetHomepage> {
           high {
             id
             title
-            authors
-            media
+            authors {
+              id
+              displayName
+              slug
+            }
+            media {
+              id
+              title
+              url
+            }
             publishDate
             tags
             slug
@@ -182,8 +239,16 @@ export async function getHomepage(): Promise<GetHomepage> {
           insideBeat {
             id
             title
-            authors
-            media
+            authors {
+              id
+              displayName
+              slug
+            }
+            media {
+              id
+              title
+              url
+            }
             publishDate
             tags
             slug
@@ -191,8 +256,16 @@ export async function getHomepage(): Promise<GetHomepage> {
           opinions {
             id
             title
-            authors
-            media
+            authors {
+              id
+              displayName
+              slug
+            }
+            media {
+              id
+              title
+              url
+            }
             publishDate
             tags
             slug
@@ -200,8 +273,16 @@ export async function getHomepage(): Promise<GetHomepage> {
           sports {
             id
             title
-            authors
-            media
+            authors {
+              id
+              displayName
+              slug
+            }
+            media {
+              id
+              title
+              url
+            }
             publishDate
             tags
             slug
@@ -209,8 +290,16 @@ export async function getHomepage(): Promise<GetHomepage> {
           news {
             id
             title
-            authors
-            media
+            authors {
+              id
+              displayName
+              slug
+            }
+            media {
+              id
+              title
+              url
+            }
             publishDate
             tags
             slug
