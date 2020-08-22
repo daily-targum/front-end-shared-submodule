@@ -15,6 +15,7 @@ export type Author = {
   id: string
   displayName: string
   slug: string
+  headshot?: string
 }
 
 export interface Article {
@@ -25,7 +26,8 @@ export interface Article {
   publishDate: number;
   tags: string[];
   slug: string;
-  subcategory: string
+  category: string;
+  subcategory: string;
 }
 
 export interface GetArticles {
@@ -55,6 +57,7 @@ export async function getArticles({
             id
             displayName
             slug
+            headshot
           }
           subcategories
           items {
@@ -207,7 +210,7 @@ export async function getArticlePreview({
 }
 
 export interface GetHomepage {
-  high: Article[];
+  high: Pick<Article, 'id' | 'title' | 'category' | 'authors' | 'media' | 'publishDate' | 'slug'>[];
   insideBeat: Article[];
   opinions: Article[];
   sports: Article[];
@@ -222,6 +225,7 @@ export async function getHomepage(): Promise<GetHomepage> {
           high {
             id
             title
+            category
             authors {
               id
               displayName
@@ -233,7 +237,6 @@ export async function getHomepage(): Promise<GetHomepage> {
               url
             }
             publishDate
-            tags
             slug
           }
           insideBeat {
