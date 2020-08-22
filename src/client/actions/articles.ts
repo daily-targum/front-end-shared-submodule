@@ -317,3 +317,46 @@ export async function getHomepage(): Promise<GetHomepage> {
   return res.data.getHomepage;
 }
 
+
+export type GetArticlesBySubcategory = Pick<Article, 'id' | 'slug' | 'tags' | 'title' | 'publishDate' | 'subcategory' | 'media' | 'authors'>[];
+
+export async function getArticlesBySubcategory({
+  subcategory,
+  // nextToken = '',
+  limit = 50
+}: {
+  subcategory: string,
+  // nextToken?: string,
+  limit?: number
+}): Promise<GetArticlesBySubcategory> {
+  const res: any = await client.query({
+    query: gql`
+      query getArticles($subcategory: String!, $limit: Int!) {
+        getArticlesBySubcategory(subcategory: $subcategory, limit: $limit){
+          id
+          slug
+          tags
+          title
+          publishDate
+          subcategory
+          media {
+            id
+            title
+            url
+          }
+          authors {
+            id
+            displayName
+          }
+        }
+      }
+    `,
+    fetchPolicy: 'no-cache',
+    variables: {
+      subcategory,
+      // nextToken,
+      limit
+    }
+  });
+  return res.data.getArticlesBySubcategory;
+}
