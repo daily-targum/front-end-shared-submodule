@@ -198,8 +198,16 @@ export async function getArticlePreview({
   return {
     id: res.sys.id,
     title: res.fields.title,
-    authors: res.fields.authors?.map((a: any) => a.fields.displayName) || [],
-    media: res.fields.image?.fields.image.fields.file?.url || '',
+    authors: res.fields.authors?.map((a: any) => ({
+      id: a.sys.id,
+      displayName: a.fields.displayName,
+      slug: '',
+    })),
+    media: [{
+      id: res.fields.image?.fields.image.sys.id ?? '',
+      url: res.fields.image?.fields.image.fields.file?.url ?? '',
+      title: 'Untitled Image'
+    }],
     publishDate: dayjs(res.sys.updatedAt, {utc: true}).valueOf() / 1000,
     updatedAt: dayjs(res.sys.updatedAt, {utc: true}).valueOf() / 1000,
     slug: res.fields.slug,
