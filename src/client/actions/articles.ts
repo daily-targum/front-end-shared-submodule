@@ -326,7 +326,7 @@ export async function getHomepage(): Promise<GetHomepage> {
 }
 
 
-export type GetArticlesBySubcategory = Pick<Article, 'id' | 'slug' | 'tags' | 'title' | 'publishDate' | 'subcategory' | 'media' | 'authors'>[];
+export type GetArticlesBySubcategory = Pick<Article, 'id' | 'slug' | 'tags' | 'title' | 'publishDate' | 'subcategory' | 'media' | 'authors' | 'category'>[];
 
 export async function getArticlesBySubcategory({
   subcategory,
@@ -347,6 +347,7 @@ export async function getArticlesBySubcategory({
           title
           publishDate
           subcategory
+          category
           media {
             id
             title
