@@ -42,17 +42,19 @@ export interface GetArticles {
 
 export async function getArticles({
   category,
-  nextToken = '',
-  limit = 50
+  limit = 20,
+  lastEvaluatedKey = '',
+  lastPublishDate = 0
 }: {
-  category: string,
-  nextToken?: string,
+  category: string
   limit?: number
+  lastEvaluatedKey?: string
+  lastPublishDate?: number
 }): Promise<GetArticles> {
   const res: any = await client.query({
     query: gql`
-      query getArticles($category: String!, $nextToken: String!, $limit: Int!) {
-        getArticles(category: $category, limit: $limit, nextToken: $nextToken){
+      query getArticles($category: String!, $limit: Int! ${lastEvaluatedKey ? ', $lastEvaluatedKey: String!, $lastPublishDate: Int!' : ''}) {
+        getArticles(category: $category, limit: $limit ${lastEvaluatedKey ? ', lastEvaluatedKey: $lastEvaluatedKey, lastPublishDate: $lastPublishDate' : ''}){
           columnists {
             id
             displayName
@@ -79,7 +81,6 @@ export async function getArticles({
                 displayName
               }
             }
-            nextToken
           }
         }
       }
@@ -87,8 +88,9 @@ export async function getArticles({
     fetchPolicy: 'no-cache',
     variables: {
       category,
-      nextToken,
-      limit
+      limit,
+      lastEvaluatedKey,
+      lastPublishDate
     }
   });
   return res.data.getArticles;
@@ -330,17 +332,19 @@ export type GetArticlesBySubcategory = Pick<Article, 'id' | 'slug' | 'tags' | 't
 
 export async function getArticlesBySubcategory({
   subcategory,
-  // nextToken = '',
-  limit = 50
+  limit = 50,
+  lastEvaluatedKey = '',
+  lastPublishDate = 0
 }: {
-  subcategory: string,
-  // nextToken?: string,
+  subcategory: string
   limit?: number
+  lastEvaluatedKey?: string
+  lastPublishDate?: number
 }): Promise<GetArticlesBySubcategory> {
   const res: any = await client.query({
     query: gql`
-      query getArticles($subcategory: String!, $limit: Int!) {
-        getArticlesBySubcategory(subcategory: $subcategory, limit: $limit){
+      query getArticles($subcategory: String!, $limit: Int! ${lastEvaluatedKey ? ', $lastEvaluatedKey: String!, $lastPublishDate: Int!' : ''}) {
+        getArticlesBySubcategory(subcategory: $subcategory, limit: $limit ${lastEvaluatedKey ? ', lastEvaluatedKey: $lastEvaluatedKey, lastPublishDate: $lastPublishDate' : ''}){
           id
           slug
           tags
@@ -363,8 +367,9 @@ export async function getArticlesBySubcategory({
     fetchPolicy: 'no-cache',
     variables: {
       subcategory,
-      // nextToken,
-      limit
+      limit,
+      lastEvaluatedKey,
+      lastPublishDate
     }
   });
   return res.data.getArticlesBySubcategory;
