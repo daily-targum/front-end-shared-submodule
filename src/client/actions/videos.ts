@@ -6,6 +6,9 @@ type Media = {
   title: string
   description: string
   url: string
+  createdAt: number
+  thumbnail: string
+  duration: number
 }
 
 export interface GetPlaylist {
@@ -36,6 +39,7 @@ export async function getPlaylist({
             title
             description
             url
+            createdAt
           }
         }
       }
@@ -80,7 +84,9 @@ export async function getPlaylists(): Promise<GetPlaylists> {
               url
               description
               createdAt
-              updatedAt
+              updatedAt,
+              thumbnail
+              duration
             }
           }
         }

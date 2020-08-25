@@ -33,6 +33,8 @@ export async function getAuthorBySlug({
               category
               media {
                 id
+                title
+                url
               }
               authors {
                 id
