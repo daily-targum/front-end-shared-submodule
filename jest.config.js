@@ -12,5 +12,6 @@ module.exports = {
     "src/**/*.{ts,tsx}",
     "!**/node_modules/**",
   ],
-  setupFiles: ['./jest.setup.js', './dotenv.js']
+  setupFiles: ['./dotenv.js'],
+  setupFilesAfterEnv: ['./jest.setup.js']
 };

@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 
 type Media = {
   id: string
-  title: string
+  title: string | null
   url: string
 }
 
@@ -18,24 +18,33 @@ export type Author = {
   headshot?: string
 }
 
-export interface Article {
-  id: string;
-  title: string;
+export type Article = {
+  abstract: string | null;
   authors: Author[];
+  body: string;
+  category: string;
+  id: string;
   media: Media[];
   publishDate: number;
-  tags: string[];
   slug: string;
-  category: string;
   subcategory: string;
+  tags: string[] | null;
+  title: string;
+  updatedAt: number;
 }
+
+/**
+ * CompactArticle is used for pages that give an overview
+ * of lots of articles and don't need the body of the article
+ */
+export type CompactArticle = Pick<Article, 'authors' | 'category' | 'id' | 'media' | 'publishDate' | 'slug' | 'subcategory' | 'tags' | 'title'>;
 
 export interface GetArticles {
   columnists: Author[]
   subcategories: string[]
   items: {
     name: string
-    articles: Article[]
+    articles: CompactArticle[]
   }[]
   nextToken: string;
 }
@@ -56,32 +65,33 @@ export async function getArticles({
       query getArticles($category: String!, $limit: Int! ${lastEvaluatedKey ? ', $lastEvaluatedKey: String!, $lastPublishDate: Int!' : ''}) {
         getArticles(category: $category, limit: $limit ${lastEvaluatedKey ? ', lastEvaluatedKey: $lastEvaluatedKey, lastPublishDate: $lastPublishDate' : ''}){
           columnists {
-            id
             displayName
-            slug
             headshot
+            id
+            slug
           }
-          subcategories
           items {
-            name
             articles {
+              authors {
+                id
+                displayName
+              }
+              category
               id
-              slug
-              tags
-              title
-              publishDate
-              subcategory
               media {
                 id
                 title
                 url
               }
-              authors {
-                id
-                displayName
-              }
+              publishDate
+              slug
+              subcategory
+              tags
+              title
             }
+            name
           }
+          subcategories
         }
       }
     `,
@@ -108,47 +118,39 @@ export interface GetArtcileBySlug {
   id?: string;
 }
 
-export interface GetArticle {
-  id: string;
-  slug: string;
-  title: string;
-  authors: Author[];
-  media: Media[];
-  publishDate: number;
-  updatedAt: number;
-  body: string;
-  category: string;
-  abstract?: string;
-}
+export type GetArticle = Article;
+
 
 export async function getArticle({
   id,
   slug
-}: GetArtcileById | GetArtcileBySlug): Promise<GetArticle> {
+}: GetArtcileById | GetArtcileBySlug): Promise<Article> {
   const res: any = await client.query({
     query: id ? (
       // Get article by id
       gql`
         query getArticle($id: ID!) {
           getArticle(id: $id) {
-            id
-            slug
-            tags
-            title
-            publishDate
-            updatedAt
-            body
-            category
             abstract
-            media {
-              id
-              url
-            }
             authors {
               id
               displayName
               slug
             }
+            body
+            category
+            id
+            media {
+              id
+              title
+              url
+            }
+            publishDate
+            slug
+            subcategory
+            tags
+            title
+            updatedAt
           }
         }
       `
@@ -157,24 +159,26 @@ export async function getArticle({
       gql`
         query getArticleBySlug($slug: String!) {
           getArticleBySlug(slug: $slug) {
-            id
-            slug
-            tags
-            title
-            publishDate
-            updatedAt
-            body
-            category
             abstract
-            media {
-              id
-              url
-            }
             authors {
               id
               displayName
               slug
             }
+            body
+            category
+            id
+            media {
+              id
+              title
+              url
+            }
+            publishDate
+            slug
+            subcategory
+            tags
+            title
+            updatedAt
           }
         }
       `
@@ -215,17 +219,21 @@ export async function getArticlePreview({
     slug: res.fields.slug,
     body: documentToHtmlString(res.fields.body),
     category: '',
-    abstract: ''
+    abstract: '',
+    tags: [],
+    subcategory: ''
   }
 }
 
 export interface GetHomepage {
-  high: Pick<Article, 'id' | 'title' | 'category' | 'authors' | 'media' | 'publishDate' | 'slug'>[];
-  insideBeat: Article[];
-  opinions: Article[];
-  sports: Article[];
-  news: Article[];
+  high: CompactArticle[];
+  insideBeat: CompactArticle[];
+  opinions: CompactArticle[];
+  sports: CompactArticle[];
+  news: CompactArticle[];
 }
+
+// export type CompactArticle = Pick<Article, 'id' | 'slug' | 'tags' | 'title' | 'publishDate' | 'subcategory' | 'media' | 'authors' | 'category'>;
 
 export async function getHomepage(): Promise<GetHomepage> {
   const res: any = await client.query({
@@ -233,14 +241,12 @@ export async function getHomepage(): Promise<GetHomepage> {
       query {
         getHomepage(device: 0){
           high {
-            id
-            title
-            category
             authors {
               id
               displayName
-              slug
             }
+            category
+            id
             media {
               id
               title
@@ -248,74 +254,81 @@ export async function getHomepage(): Promise<GetHomepage> {
             }
             publishDate
             slug
+            subcategory
+            tags
+            title
           }
           insideBeat {
-            id
-            title
             authors {
               id
               displayName
-              slug
             }
+            category
+            id
             media {
               id
               title
               url
             }
             publishDate
-            tags
             slug
+            subcategory
+            tags
+            title
           }
           opinions {
-            id
-            title
             authors {
               id
               displayName
-              slug
             }
+            category
+            id
             media {
               id
               title
               url
             }
             publishDate
-            tags
             slug
+            subcategory
+            tags
+            title
           }
           sports {
-            id
-            title
             authors {
               id
               displayName
-              slug
             }
+            category
+            id
             media {
               id
               title
               url
             }
             publishDate
-            tags
             slug
+            subcategory
+            tags
+            title
           } 
           news {
-            id
-            title
             authors {
               id
               displayName
-              slug
             }
+            category
+            id
             media {
               id
               title
               url
             }
             publishDate
-            tags
             slug
+            subcategory
+            tags
+            title
           } 
         }
       }
@@ -328,7 +341,7 @@ export async function getHomepage(): Promise<GetHomepage> {
 }
 
 
-export type GetArticlesBySubcategory = Pick<Article, 'id' | 'slug' | 'tags' | 'title' | 'publishDate' | 'subcategory' | 'media' | 'authors' | 'category'>[];
+export type GetArticlesBySubcategory = CompactArticle[];
 
 export async function getArticlesBySubcategory({
   subcategory,
@@ -345,22 +358,22 @@ export async function getArticlesBySubcategory({
     query: gql`
       query getArticles($subcategory: String!, $limit: Int! ${lastEvaluatedKey ? ', $lastEvaluatedKey: String!, $lastPublishDate: Int!' : ''}) {
         getArticlesBySubcategory(subcategory: $subcategory, limit: $limit ${lastEvaluatedKey ? ', lastEvaluatedKey: $lastEvaluatedKey, lastPublishDate: $lastPublishDate' : ''}){
-          id
-          slug
-          tags
-          title
-          publishDate
-          subcategory
+          authors {
+            id
+            displayName
+          }
           category
+          id
           media {
             id
             title
             url
           }
-          authors {
-            id
-            displayName
-          }
+          publishDate
+          slug
+          subcategory
+          tags
+          title
         }
       }
     `,

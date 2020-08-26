@@ -16,40 +16,71 @@ describe("getArticles", () => {
     done();
   });
 
-  it("schema", async (done) => {
+  it("getArticle by id schema", async (done) => {
     const res = await getArticle({
       id: ID
     });
+
     expect(res).toMatchObject({
-      id: expect.stringMatching(regex.id),
-      slug: expect.any(String),
-      title: expect.any(String),
-      authors: expect.arrayContaining([expect.any(String)]),
-      media: expect.arrayContaining([expect.stringMatching(regex.url)]),
-      publishDate: expect.any(Number),
-      updatedAt: expect.any(Number),
+      // @ts-ignore
+      abstract: expect.anyOrNull(String),
+      authors: expect.arrayContaining([expect.objectContaining({
+        __typename: "Author",
+        id: expect.stringMatching(regex.id),
+        displayName: expect.any(String),
+        slug: expect.any(String),
+      })]),
       body: expect.any(String),
       category: expect.any(String),
-      // abstract: expect.any(String)
+      id: expect.stringMatching(regex.id),
+      media: expect.arrayContaining([expect.objectContaining({
+        __typename: "Media",
+        id: expect.stringMatching(regex.id),
+        // @ts-ignore
+        title: expect.anyOrNull(String),
+        url: expect.any(String)
+      })]),
+      publishDate: expect.any(Number),
+      slug: expect.any(String),
+      subcategory: expect.any(String),
+      // @ts-ignore
+      tags: expect.arrayContainingOrNull([expect.any(String)]),
+      title: expect.any(String),
+      updatedAt: expect.any(Number)
     });
     done();
   });
 
-  it("schema", async (done) => {
+  it("getArticle by slug schema", async (done) => {
     const res = await getArticle({
       slug: SLUG
     });
     expect(res).toMatchObject({
-      id: expect.stringMatching(regex.id),
-      slug: expect.any(String),
-      title: expect.any(String),
-      authors: expect.arrayContaining([expect.any(String)]),
-      media: expect.arrayContaining([expect.stringMatching(regex.url)]),
-      publishDate: expect.any(Number),
-      updatedAt: expect.any(Number),
+      // @ts-ignore
+      abstract: expect.anyOrNull(String),
+      authors: expect.arrayContaining([expect.objectContaining({
+        __typename: "Author",
+        id: expect.stringMatching(regex.id),
+        displayName: expect.any(String),
+        slug: expect.any(String),
+      })]),
       body: expect.any(String),
       category: expect.any(String),
-      // abstract: expect.any(String)
+      id: expect.stringMatching(regex.id),
+      media: expect.arrayContaining([expect.objectContaining({
+        __typename: "Media",
+        id: expect.stringMatching(regex.id),
+        // @ts-ignore
+        title: expect.anyOrNull(String),
+        url: expect.any(String)
+      })]),
+      publishDate: expect.any(Number),
+      slug: expect.any(String),
+      subcategory: expect.any(String),
+      // @ts-ignore
+      tags: expect.arrayContainingOrNull([expect.any(String)]),
+      title: expect.any(String),
+      updatedAt: expect.any(Number)
     });
     done();
   });

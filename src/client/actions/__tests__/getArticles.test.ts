@@ -8,10 +8,10 @@ describe("getArticles", () => {
 
   it("categories", async (done) => {
     let responses = await Promise.all(CAGETORIES.map(async category => {
-      return await getArticles({category});
+      return await getArticles({ category, limit: 1 });
     }))
     responses.forEach(res => {
-      expect(res.items.length).toBeGreaterThan(0);
+      expect(res.items[0].articles.length).toBeGreaterThan(0);
     });
     done();
   });
@@ -22,7 +22,7 @@ describe("getArticles", () => {
       category: 'News',
       limit
     });
-    expect(res.items.length).toBe(limit);
+    expect(res.items[0].articles.length).toBe(limit);
     done();
   });
 
@@ -42,18 +42,40 @@ describe("getArticles", () => {
   //   done();
   // });
 
+  // export type CompactArticle = Pick<Article, 'authors' | 'category' | 'id' | 'media' | 'publishDate' | 'slug' | 'subcategory' | 'tags' | 'title'>;
+
   it("schema", async (done) => {
     const res = await getArticles({
       category: 'News'
     });
     res.items.forEach(item => {
       expect(item).toMatchObject({
-        id: expect.stringMatching(regex.id),
-        title: expect.any(String),
-        authors: expect.arrayContaining([expect.any(String)]),
-        media: expect.arrayContaining([expect.stringMatching(regex.url)]),
-        publishDate: expect.any(Number),
-        tags: expect.arrayContaining([])
+        articles: expect.arrayContaining([
+          expect.objectContaining({
+            // @ts-ignore
+            // authors: expect.arrayContaining([expect.objectContaining({
+            //   __typename: "Author",
+            //   id: expect.stringMatching(regex.id),
+            //   displayName: expect.any(String),
+            //   slug: expect.any(String),
+            // })]),
+            category: expect.any(String),
+            id: expect.stringMatching(regex.id),
+            media: expect.arrayContaining([expect.objectContaining({
+              __typename: "Media",
+              id: expect.stringMatching(regex.id),
+              // @ts-ignore
+              title: expect.anyOrNull(String),
+              url: expect.any(String)
+            })]),
+            publishDate: expect.any(Number),
+            slug: expect.any(String),
+            subcategory: expect.any(String),
+            // @ts-ignore
+            tags: expect.arrayContainingOrNull([expect.any(String)]),
+            title: expect.any(String)
+          })
+        ])
       });
     });
     done();

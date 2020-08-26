@@ -1,6 +1,7 @@
 import { GetArticle, GetArticles } from '../articles';
 
 export const ARTICLE: GetArticle = {
+  abstract: null,
   id: "05db0666-e54c-4a8d-a8e5-b9649ca36948",
   slug: "rutgers-ncaa-tournament-hopes-depend-on-team-wide-performance",
   title: "Rutgers' NCAA Tournament hopes depend on team-wide performance",
@@ -17,7 +18,9 @@ export const ARTICLE: GetArticle = {
   publishDate: 1588602920,
   updatedAt: 1588602920,
   body: "",
-  category: "News"
+  category: "News",
+  subcategory: 'Subcategory',
+  tags: null
 };
 
 export function getArticles({
