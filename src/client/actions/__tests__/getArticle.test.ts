@@ -4,7 +4,7 @@ import * as regex from '../../../regex';
 let ID = '';
 let SLUG = '';
 
-describe("getArticles", () => {
+describe("getArticle", () => {
 
   beforeAll(async (done) => {
     const res = await getArticles({

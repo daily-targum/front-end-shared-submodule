@@ -48,17 +48,18 @@ describe("getArticles", () => {
     const res = await getArticles({
       category: 'News'
     });
+    
     res.items.forEach(item => {
       expect(item).toMatchObject({
         articles: expect.arrayContaining([
           expect.objectContaining({
             // @ts-ignore
-            // authors: expect.arrayContaining([expect.objectContaining({
-            //   __typename: "Author",
-            //   id: expect.stringMatching(regex.id),
-            //   displayName: expect.any(String),
-            //   slug: expect.any(String),
-            // })]),
+            authors: expect.arrayContaining([expect.objectContaining({
+              __typename: "Author",
+              id: expect.stringMatching(regex.id),
+              displayName: expect.any(String),
+              slug: expect.any(String),
+            })]),
             category: expect.any(String),
             id: expect.stringMatching(regex.id),
             media: expect.arrayContaining([expect.objectContaining({

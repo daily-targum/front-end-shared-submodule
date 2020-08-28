@@ -75,6 +75,7 @@ export async function getArticles({
               authors {
                 id
                 displayName
+                slug
               }
               category
               id

@@ -13,7 +13,6 @@ export type HoruItem = {
   slug: string
   media: Media[]
   altText: string
-  description: string
   quote: string
   createdAt: number
   updatedAt: number
@@ -44,7 +43,6 @@ export async function getHoru({
               title
               url
             }
-            description
             quote
             createdAt
             updatedAt

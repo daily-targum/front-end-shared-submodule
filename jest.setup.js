@@ -67,7 +67,7 @@ expect.extend({
       pass = sample.length === 0 ||
         (Array.isArray(other) &&
         sample.every(item =>
-          other.some(another => jest.equals(item, another)),
+          other.some(another => expect(item).toEqual(another)),
         ));
     } 
     
