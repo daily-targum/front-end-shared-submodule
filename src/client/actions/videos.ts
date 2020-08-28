@@ -13,41 +13,45 @@ type Media = {
 }
 
 export interface GetPlaylist {
+  id: string
   title: string
   slug: string
   description: string
-  media: Media
+  media: Media[]
 }
 
 export async function getPlaylist({
-  id
+  slug
 }: {
-  id: string
+  slug: string
 }): Promise<GetPlaylist> {
   const res: any = await client.query({
     query: gql`
-      query getPlaylist($id: String!) {
-        getPlaylist(id: $id) {
+      query getPlaylistBySlug($slug: String!) {
+        getPlaylistBySlug(slug: $slug) {
+          id
           title
           slug
           description
           media {
             id
             title
-            description
             url
+            description
             createdAt
-            updatedAt
+            updatedAt,
+            thumbnail
+            duration
           }
         }
       }
     `,
     fetchPolicy: 'no-cache',
     variables: {
-      id
+      slug
     }
   });
-  return res.data.getPlaylist;
+  return res.data.getPlaylistBySlug;
 }
 
 

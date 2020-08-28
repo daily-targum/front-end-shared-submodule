@@ -38,15 +38,17 @@ export const formatDate = (date: number | string) => {
 }
 
 export function capitalizeWords(str: string){
-  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  return str.replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
  }
  
 export function camelCaseToCapitalized(str: string) {
-  return capitalizeWords(str.replace(/([A-Z])/, ' $1'));
+  return capitalizeWords(str.replace(/([A-Z])/g, ' $1'));
 }
 
 export function camelCaseToHyphenated(str: string) {
-  return str.replace(/([A-Z])/, '-$1').toLowerCase();
+  return str.replace(/([A-Z])/g, '-$1').toLowerCase();
 }
 
 export function hyphenatedToCapitalized(str: string) {
