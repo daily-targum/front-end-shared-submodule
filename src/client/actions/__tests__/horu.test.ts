@@ -1,12 +1,6 @@
 import { getHoru } from '..';
 import * as regex from '../../../regex';
 
-type Media = {
-  id: string
-  title: string
-  url: string
-}
-
 describe("horu", () => {
 
   it("getHoru schema", async (done) => {

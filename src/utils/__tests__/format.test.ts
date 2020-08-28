@@ -10,49 +10,6 @@ import {
    capitalizedToHypenated, 
    secondsToTimeCode 
 } from '../format';
-import { getRandomInt} from '../number';
-
-// export function capitalizeWords(str: string){
-//   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-//  }
- 
-// export function camelCaseToCapitalized(str: string) {
-//   return capitalizeWords(str.replace(/([A-Z])/, ' $1'));
-// }
-
-// export function camelCaseToHyphenated(str: string) {
-//   return str.replace(/([A-Z])/, '-$1').toLowerCase();
-// }
-
-// export function hyphenatedToCapitalized(str: string) {
-//   return capitalizeWords(str.replace(/-/g, ' '));
-// }
-
-// export function hyphenatedToCamelCase(str: string) {
-//   return str.replace(/-([a-z0-9])/g, (g) => g[1].toUpperCase())
-// }
-
-// export function capitalizedToHypenated(str: string) {
-//   return str.replace(/\s([A-Z])/g, '-$1').toLowerCase();
-// }
-
-// export function secondsToTimeCode(seconds: number) {   
-//   // Hours, minutes and seconds
-//   let hrs = ~~(seconds / 3600);
-//   let mins = ~~((seconds % 3600) / 60);
-//   let secs = ~~seconds % 60;
-
-//   // Output like "1:01" or "4:03:59" or "123:03:59"
-//   let ret = "";
-
-//   if (hrs > 0) {
-//     ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-//   }
-
-//   ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-//   ret += "" + secs;
-//   return ret;
-// }
 
 describe('format', () => {
 
@@ -81,12 +38,12 @@ describe('format', () => {
   });
 
   it('secondsToTimeCode', () => {
-    const minutes = getRandomInt(0, 59);
-    const seconds = getRandomInt(0, 59);
-
-    const computedSeconds = minutes * 60 + seconds;
-
-    // expect(secondsToTimeCode(computedSeconds)).toBe();
+    expect(secondsToTimeCode(20)).toBe('0:20');
+    expect(secondsToTimeCode(60)).toBe('1:00');
+    expect(secondsToTimeCode(60 * 1.5)).toBe('1:30');
+    expect(secondsToTimeCode(60 * 3)).toBe('3:00');
+    expect(secondsToTimeCode(60 * 10)).toBe('10:00');
+    expect(secondsToTimeCode(60 * 60)).toBe('1:00:00');
   });
 
 
