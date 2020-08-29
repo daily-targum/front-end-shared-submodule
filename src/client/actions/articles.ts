@@ -11,6 +11,8 @@ type Media = {
   url: string
 }
 
+type CompactMedia = Pick<Media, 'url'>;
+
 export type Author = {
   id: string
   displayName: string
@@ -18,13 +20,13 @@ export type Author = {
   headshot?: string
 }
 
-export type Article = {
+export type Article<M = Media> = {
   abstract: string | null;
   authors: Author[];
   body: string;
   category: string;
   id: string;
-  media: (Media | undefined)[];
+  media: (M | undefined)[];
   publishDate: number;
   slug: string;
   subcategory: string;
@@ -37,7 +39,7 @@ export type Article = {
  * CompactArticle is used for pages that give an overview
  * of lots of articles and don't need the body of the article
  */
-export type CompactArticle = Pick<Article, 'authors' | 'category' | 'id' | 'media' | 'publishDate' | 'slug' | 'subcategory' | 'tags' | 'title'>;
+export type CompactArticle = Pick<Article<CompactMedia>, 'authors' | 'category' | 'id' | 'media' | 'publishDate' | 'slug' | 'subcategory' | 'tags' | 'title'>;
 
 export interface GetArticles {
   columnists: Author[]
@@ -73,15 +75,11 @@ export async function getArticles({
           items {
             articles {
               authors {
-                id
                 displayName
-                slug
               }
               category
               id
               media {
-                id
-                title
                 url
               }
               publishDate
@@ -143,8 +141,8 @@ export async function getArticle({
             id
             media {
               id
-              title
               url
+              title
             }
             publishDate
             slug
@@ -171,8 +169,8 @@ export async function getArticle({
             id
             media {
               id
-              title
               url
+              title
             }
             publishDate
             slug
@@ -243,14 +241,11 @@ export async function getHomepage(): Promise<GetHomepage> {
         getHomepage(device: 0){
           high {
             authors {
-              id
               displayName
             }
             category
             id
             media {
-              id
-              title
               url
             }
             publishDate
@@ -261,14 +256,11 @@ export async function getHomepage(): Promise<GetHomepage> {
           }
           insideBeat {
             authors {
-              id
               displayName
             }
             category
             id
             media {
-              id
-              title
               url
             }
             publishDate
@@ -279,14 +271,11 @@ export async function getHomepage(): Promise<GetHomepage> {
           }
           opinions {
             authors {
-              id
               displayName
             }
             category
             id
             media {
-              id
-              title
               url
             }
             publishDate
@@ -297,14 +286,11 @@ export async function getHomepage(): Promise<GetHomepage> {
           }
           sports {
             authors {
-              id
               displayName
             }
             category
             id
             media {
-              id
-              title
               url
             }
             publishDate
@@ -315,14 +301,11 @@ export async function getHomepage(): Promise<GetHomepage> {
           } 
           news {
             authors {
-              id
               displayName
             }
             category
             id
             media {
-              id
-              title
               url
             }
             publishDate
@@ -360,14 +343,11 @@ export async function getArticlesBySubcategory({
       query getArticles($subcategory: String!, $limit: Int! ${lastEvaluatedKey ? ', $lastEvaluatedKey: String!, $lastPublishDate: Int!' : ''}) {
         getArticlesBySubcategory(subcategory: $subcategory, limit: $limit ${lastEvaluatedKey ? ', lastEvaluatedKey: $lastEvaluatedKey, lastPublishDate: $lastPublishDate' : ''}){
           authors {
-            id
             displayName
           }
           category
           id
           media {
-            id
-            title
             url
           }
           publishDate

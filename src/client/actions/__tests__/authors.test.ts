@@ -1,18 +1,9 @@
-import { getAuthorBySlug, getArticles } from '..';
+import { getAuthorBySlug } from '..';
 import * as regex from '../../../regex';
 
-let SLUG = '';
+let SLUG = 'madison-mcgay';
 
 describe("authors", () => {
-
-  beforeAll(async (done) => {
-    const res = await getArticles({
-      category: 'News',
-      limit: 1
-    });
-    SLUG = res.items[0].articles[0].authors[0].slug;
-    done();
-  });
 
   it("getAuthor by slug schema", async (done) => {
     const res = await getAuthorBySlug({
@@ -24,6 +15,8 @@ describe("authors", () => {
         __typename: "Author",
         id: expect.stringMatching(regex.id),
         displayName: expect.any(String),
+        // @ts-ignore
+        bio: expect.anyOrNull(String),
       },
       articles: expect.arrayContaining([
         expect.objectContaining({
@@ -31,9 +24,6 @@ describe("authors", () => {
           id: expect.stringMatching(regex.id),
           media: expect.arrayContaining([expect.objectContaining({
             __typename: "Media",
-            id: expect.stringMatching(regex.id),
-            // @ts-ignore
-            title: expect.anyOrNull(String),
             url: expect.any(String)
           })]),
           publishDate: expect.any(Number),

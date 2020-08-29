@@ -42,8 +42,6 @@ describe("getArticles", () => {
   //   done();
   // });
 
-  // export type CompactArticle = Pick<Article, 'authors' | 'category' | 'id' | 'media' | 'publishDate' | 'slug' | 'subcategory' | 'tags' | 'title'>;
-
   it("schema", async (done) => {
     const res = await getArticles({
       category: 'News'
@@ -51,22 +49,17 @@ describe("getArticles", () => {
     
     res.items.forEach(item => {
       expect(item).toMatchObject({
+        name: expect.any(String),
         articles: expect.arrayContaining([
           expect.objectContaining({
-            // @ts-ignore
             authors: expect.arrayContaining([expect.objectContaining({
               __typename: "Author",
-              id: expect.stringMatching(regex.id),
               displayName: expect.any(String),
-              slug: expect.any(String),
             })]),
             category: expect.any(String),
             id: expect.stringMatching(regex.id),
             media: expect.arrayContaining([expect.objectContaining({
               __typename: "Media",
-              id: expect.stringMatching(regex.id),
-              // @ts-ignore
-              title: expect.anyOrNull(String),
               url: expect.any(String)
             })]),
             publishDate: expect.any(Number),
@@ -76,7 +69,8 @@ describe("getArticles", () => {
             tags: expect.arrayContainingOrNull([expect.any(String)]),
             title: expect.any(String)
           })
-        ])
+        ]),
+        __typename: 'SubArticleConnection'
       });
     });
     done();

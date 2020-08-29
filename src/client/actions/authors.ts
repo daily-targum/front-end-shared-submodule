@@ -1,13 +1,14 @@
 import { client } from '../client';
 import gql from 'graphql-tag';
-import { Article } from './articles';
+import { CompactArticle } from './articles';
 
 export interface GetAuthorPage {
-  articles: Pick<Article, 'id' | 'slug' | 'tags' | 'title' | 'publishDate' | 'subcategory' | 'media' | 'authors' | 'category'>[]
+  articles: CompactArticle[]
   author: {
     id: string
     displayName: string
     headshot?: string
+    bio?: string
   }
 }
 
@@ -32,18 +33,14 @@ export async function getAuthorBySlug({
               subcategory
               category
               media {
-                id
-                title
                 url
-              }
-              authors {
-                id
               }
             }
             author {
               id
               displayName
               headshot
+              bio
             }
           }
         }
