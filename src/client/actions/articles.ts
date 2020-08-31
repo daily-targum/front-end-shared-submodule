@@ -53,7 +53,7 @@ export interface GetArticles {
 
 export async function getArticles({
   category,
-  limit = 20,
+  limit = 50,
   lastEvaluatedKey = '',
   lastPublishDate = 0
 }: {
