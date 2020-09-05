@@ -36,5 +36,6 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn typescript && yarn test --watchAll=false --collectCoverageFrom=src/**/*.{js,jsx,ts,tsx} --coverage"
     }
-  }
+  },
+  "sideEffects": false
 }
