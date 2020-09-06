@@ -1,7 +1,6 @@
 // ENVIRONMENT VARIABLES
 import * as secrets from '../secrets';
 
-import 'isomorphic-fetch';
 import * as contentful from 'contentful';
 export const createClient = contentful.createClient;
 

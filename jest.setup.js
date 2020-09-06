@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import 'isomorphic-fetch';
 
 jest.setTimeout(30000);
 
