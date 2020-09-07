@@ -44,7 +44,7 @@ describe("getArticle", () => {
       slug: expect.any(String),
       subcategory: expect.any(String),
       // @ts-ignore
-      tags: expect.arrayContainingOrNull([expect.any(String)]),
+      // tags: expect.arrayContainingOrNull([expect.any(String)]),
       title: expect.any(String),
       updatedAt: expect.any(Number)
     });
@@ -78,7 +78,7 @@ describe("getArticle", () => {
       slug: expect.any(String),
       subcategory: expect.any(String),
       // @ts-ignore
-      tags: expect.arrayContainingOrNull([expect.any(String)]),
+      // tags: expect.arrayContainingOrNull([expect.any(String)]),
       title: expect.any(String),
       updatedAt: expect.any(Number)
     });

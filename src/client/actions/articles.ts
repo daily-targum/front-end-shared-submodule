@@ -135,6 +135,7 @@ export async function getArticle({
               id
               displayName
               slug
+              headshot
             }
             body
             category
@@ -163,6 +164,7 @@ export async function getArticle({
               id
               displayName
               slug
+              headshot
             }
             body
             category
