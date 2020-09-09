@@ -9,9 +9,12 @@ type Media = {
   id: string
   title: string | null
   url: string
+  description: string
+  altText: string | null
+  credits: string
 }
 
-type CompactMedia = Pick<Media, 'url'>;
+type CompactMedia = Pick<Media, 'url' | 'altText' | 'description'>;
 
 export type Author = {
   id: string
@@ -80,6 +83,8 @@ export async function getArticles({
               category
               id
               media {
+                altText
+                description
                 url
               }
               publishDate
@@ -141,9 +146,10 @@ export async function getArticle({
             category
             id
             media {
-              id
+              altText
+              credits
+              description
               url
-              title
             }
             publishDate
             slug
@@ -170,9 +176,10 @@ export async function getArticle({
             category
             id
             media {
-              id
+              altText
+              credits
+              description
               url
-              title
             }
             publishDate
             slug
@@ -213,7 +220,10 @@ export async function getArticlePreview({
     media: [{
       id: res.fields.image?.fields.image.sys.id ?? '',
       url: res.fields.image?.fields.image.fields.file?.url ?? '',
-      title: 'Untitled Image'
+      title: 'Untitled Image',
+      description: 'This is an image',
+      altText: 'This is an image',
+      credits: 'Idk who took this photo'
     }],
     publishDate: dayjs(res.sys.updatedAt, {utc: true}).valueOf() / 1000,
     updatedAt: dayjs(res.sys.updatedAt, {utc: true}).valueOf() / 1000,
@@ -248,6 +258,8 @@ export async function getHomepage(): Promise<GetHomepage> {
             category
             id
             media {
+              altText
+              description
               url
             }
             publishDate
@@ -263,6 +275,8 @@ export async function getHomepage(): Promise<GetHomepage> {
             category
             id
             media {
+              altText
+              description
               url
             }
             publishDate
@@ -278,6 +292,8 @@ export async function getHomepage(): Promise<GetHomepage> {
             category
             id
             media {
+              altText
+              description
               url
             }
             publishDate
@@ -293,6 +309,8 @@ export async function getHomepage(): Promise<GetHomepage> {
             category
             id
             media {
+              altText
+              description
               url
             }
             publishDate
@@ -308,6 +326,8 @@ export async function getHomepage(): Promise<GetHomepage> {
             category
             id
             media {
+              altText
+              description
               url
             }
             publishDate
@@ -350,6 +370,8 @@ export async function getArticlesBySubcategory({
           category
           id
           media {
+            altText
+            description
             url
           }
           publishDate

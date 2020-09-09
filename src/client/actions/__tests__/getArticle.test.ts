@@ -35,9 +35,12 @@ describe("getArticle", () => {
       id: expect.stringMatching(regex.id),
       media: expect.arrayContaining([expect.objectContaining({
         __typename: "Media",
-        id: expect.stringMatching(regex.id),
         // @ts-ignore
-        title: expect.anyOrNull(String),
+        altText: expect.anyOrNull(String),
+        // @ts-ignore
+        credits: expect.anyOrNull(String),
+        // @ts-ignore
+        description: expect.anyOrNull(String),
         url: expect.any(String)
       })]),
       publishDate: expect.any(Number),
@@ -69,9 +72,12 @@ describe("getArticle", () => {
       id: expect.stringMatching(regex.id),
       media: expect.arrayContaining([expect.objectContaining({
         __typename: "Media",
-        id: expect.stringMatching(regex.id),
         // @ts-ignore
-        title: expect.anyOrNull(String),
+        altText: expect.anyOrNull(String),
+        // @ts-ignore
+        credits: expect.anyOrNull(String),
+        // @ts-ignore
+        description: expect.anyOrNull(String),
         url: expect.any(String)
       })]),
       publishDate: expect.any(Number),

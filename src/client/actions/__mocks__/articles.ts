@@ -13,7 +13,10 @@ export const ARTICLE: GetArticle = {
   media: [{
     id: 'image-id',
     title: 'Title',
-    url: "https://snworksceo.imgix.net/rdt/bb7e35ca-1fbf-4b4e-8b9b-c4daa6d0ce33.sized-1000x1000.JPG"
+    url: "https://snworksceo.imgix.net/rdt/bb7e35ca-1fbf-4b4e-8b9b-c4daa6d0ce33.sized-1000x1000.JPG",
+    altText: "fake image",
+    description: "this image is fake",
+    credits: 'Taken by Lord Snipp'
   }],
   publishDate: 1588602920,
   updatedAt: 1588602920,
