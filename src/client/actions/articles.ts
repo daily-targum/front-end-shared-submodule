@@ -218,8 +218,8 @@ export async function getArticlePreview({
       slug: '',
     })),
     media: [{
-      id: res.fields.image?.fields.image.sys.id ?? '',
-      url: res.fields.image?.fields.image.fields.file?.url ?? '',
+      id: res.fields.image?.fields.image?.sys.id ?? '',
+      url: res.fields.image?.fields.image?.fields.file?.url ?? '',
       title: 'Untitled Image',
       description: 'This is an image',
       altText: 'This is an image',
