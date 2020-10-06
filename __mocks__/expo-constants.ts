@@ -13,6 +13,7 @@ export default {
       AWS_APPSYNC_URL: process.env.AWS_APPSYNC_URL,
       AWS_APPSYNC_REGION: process.env.AWS_APPSYNC_REGION,
       AWS_APPSYNC_API_KEY: process.env.AWS_APPSYNC_API_KEY,
+      AWS_ELASTICSEARCH_URL: process.env.AWS_ELASTICSEARCH_URL,
       // Contentful
       CONTENTFUL_SPACE: process.env.CONTENTFUL_SPACE,
       CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN,

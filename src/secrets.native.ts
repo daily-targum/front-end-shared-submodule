@@ -8,3 +8,4 @@ export const AWS_APPSYNC_REGION = Constants.manifest.extra.AWS_APPSYNC_REGION;
 export const AWS_APPSYNC_API_KEY = Constants.manifest.extra.AWS_APPSYNC_API_KEY;
 export const CONTENTFUL_SPACE = Constants.manifest.extra.CONTENTFUL_SPACE;
 export const CONTENTFUL_ACCESS_TOKEN_DRAFTS = Constants.manifest.extra.CONTENTFUL_ACCESS_TOKEN_DRAFTS;
+export const AWS_ELASTICSEARCH_URL = Constants.manifest.extra.AWS_ELASTICSEARCH_URL;
