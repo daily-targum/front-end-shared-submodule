@@ -209,6 +209,13 @@ export async function getArticlePreview({
 
   const { documentToHtmlString } = await import('@contentful/rich-text-html-renderer');
 
+  const imgFields = res.fields.image?.fields;
+
+  let img = '';
+  if (imgFields && imgFields.file) {
+    img = JSON.parse(imgFields.file).url;
+  }
+
   return {
     id: res.sys.id,
     title: res.fields.title,
@@ -219,11 +226,11 @@ export async function getArticlePreview({
     })),
     media: [{
       id: res.fields.image?.sys.id ?? '',
-      url: res.fields.image?.fields.file ?? '',
-      title: 'Untitled Image',
-      description: 'This is an image',
-      altText: 'This is an image',
-      credits: 'Idk who took this photo'
+      url: img ?? '',
+      title: imgFields?.title,
+      description: imgFields?.caption,
+      altText: null,
+      credits: imgFields?.credits
     }],
     publishDate: dayjs(res.sys.updatedAt, {utc: true}).valueOf() / 1000,
     updatedAt: dayjs(res.sys.updatedAt, {utc: true}).valueOf() / 1000,
