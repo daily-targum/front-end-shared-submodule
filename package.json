@@ -16,7 +16,8 @@
     "contentful": "7.14.6",
     "dayjs": "1.8.35",
     "graphql-tag": "2.11.0",
-    "isomorphic-fetch": "^2.2.1"
+    "isomorphic-fetch": "^2.2.1",
+    "query-string": "^6.13.5"
   },
   "devDependencies": {
     "@babel/preset-env": "7.11.5",
