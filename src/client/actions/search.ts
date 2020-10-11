@@ -2,7 +2,9 @@ import queryString from 'query-string';
 import { Article } from './articles';
 import * as secrets from '../../secrets';
 
-type Source = Pick<Article, 'id' | 'title' | 'publishDate' | 'updatedAt' | 'slug' | 'authors' | 'body' | 'tags' | 'abstract' | 'media' | 'category'>;
+interface Source extends Pick<Article, 'id' | 'title' | 'publishDate' | 'updatedAt' | 'slug' | 'authors' | 'body' | 'tags' | 'abstract' | 'category'> {
+  media: string[];
+}
 
 type SearchHit = {
   _index: string;
