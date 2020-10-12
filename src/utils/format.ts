@@ -80,3 +80,7 @@ export function secondsToTimeCode(seconds: number) {
   ret += "" + secs;
   return ret;
 }
+
+export function extractTextFromHTML(str: string) {
+  return str.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ');
+}
