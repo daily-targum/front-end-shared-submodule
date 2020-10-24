@@ -8,7 +8,8 @@ export const ARTICLE: GetArticle = {
   authors: [{
     id: '1234',
     displayName: "Jon Doe",
-    slug: 'jon-dow'
+    slug: 'jon-dow',
+    headshot: 'https://dailytargum.imgix.net/images/0a4f6fb9-ec71-447b-8a56-6988830ff3fb.jpeg?ar=1:1&auto=compress&crop=faces,entropy&fit=crop&fm=webp&width=80'
   }],
   media: [{
     id: 'image-id',
