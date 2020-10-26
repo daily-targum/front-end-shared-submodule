@@ -25,6 +25,7 @@ export async function getAuthorBySlug({
         query getAuthorBySlug($slug: String!) {
           getAuthorBySlug(slug: $slug){
             articles {
+              abstract
               id
               slug
               tags

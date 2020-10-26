@@ -27,7 +27,7 @@ export type Article<M = Media> = {
   abstract: string | null;
   authors: Author[];
   body: string;
-  category: string;
+  category?: string;
   id: string;
   media: (M | undefined)[];
   publishDate: number;
@@ -42,7 +42,7 @@ export type Article<M = Media> = {
  * CompactArticle is used for pages that give an overview
  * of lots of articles and don't need the body of the article
  */
-export type CompactArticle = Pick<Article<CompactMedia>, 'authors' | 'category' | 'id' | 'media' | 'publishDate' | 'slug' | 'subcategory' | 'tags' | 'title'>;
+export type CompactArticle = Pick<Article<CompactMedia>, 'authors' | 'category' | 'id' | 'media' | 'publishDate' | 'slug' | 'subcategory' | 'tags' | 'title' | 'abstract'>;
 
 export interface GetArticles {
   columnists: Author[]
@@ -81,6 +81,7 @@ export async function getArticles({
                 displayName
               }
               category
+              abstract
               id
               media {
                 altText
