@@ -1,7 +1,7 @@
 import { GetArticle, GetArticles } from '../articles';
 
 export const ARTICLE: GetArticle = {
-  abstract: null,
+  abstract: 'With the Rutgers women’s basketball team’s exit from its conference tournament this past Thursday, the Scarlet Knights (22-9, 11-7) will now look toward Selection Monday for their seeding in the NCAA Tournament.  ',
   id: "05db0666-e54c-4a8d-a8e5-b9649ca36948",
   slug: "rutgers-ncaa-tournament-hopes-depend-on-team-wide-performance",
   title: "Rutgers' NCAA Tournament hopes depend on team-wide performance",
