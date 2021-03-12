@@ -9,13 +9,9 @@ type Media = {
 
 export type HoruItem = {
   id: string
-  title: string
-  slug: string
-  media: Media[]
-  altText: string
+  media: string[]
   quote: string
-  createdAt: number
-  updatedAt: number
+  title: string
 }
 
 export interface GetHoru {
@@ -32,20 +28,13 @@ export async function getHoru({
 }): Promise<GetHoru> {
   const res: any = await client.query({
     query: gql`
-      query getHORUs($nextToken: String!, $limit: Int!) {
-        getHORUs(device: 1, limit: $limit, nextToken: $nextToken){
+      query listHORUS($nextToken: String!, $limit: Int!) {
+        listHORUS(limit: $limit, nextToken: $nextToken){
           items {
             id
-            title
-            slug
-            media {
-              id
-              title
-              url
-            }
+            media
             quote
-            createdAt
-            updatedAt
+            title
           }
           nextToken
         }
@@ -57,5 +46,5 @@ export async function getHoru({
       limit
     }
   });
-  return res.data.getHORUs;
+  return res.data.listHORUS;
 }
